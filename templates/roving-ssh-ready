@@ -1,7 +1,6 @@
-POST https://www.googleapis.com/compute/v1/projects/dopest-project-ever-351102/global/instanceTemplates
 {
-  "description": "test management comment of doom",
-  "name": "instance-template-1",
+  "description": "simple ssh ready spot instance",
+  "name": "roving-ssh-ready",
   "properties": {
     "canIpForward": false,
     "confidentialInstanceConfig": {
@@ -12,7 +11,7 @@ POST https://www.googleapis.com/compute/v1/projects/dopest-project-ever-351102/g
       {
         "autoDelete": true,
         "boot": true,
-        "deviceName": "instance-template-1",
+        "deviceName": "roving-ssh-ready",
         "diskEncryptionKey": {},
         "initializeParams": {
           "diskSizeGb": "20",
