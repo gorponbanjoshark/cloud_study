@@ -71,7 +71,7 @@ def update_template(name='roving-ssh-ready'):
     """
     if name in get_instance_template_names():
         delete_instance_template(name)
-    the_data = get_json(f'templates/f{name}')
+    the_data = get_json(f'templates/{name}')
     insert_instance_template(the_data)
     return list_all_instance_templates()
 

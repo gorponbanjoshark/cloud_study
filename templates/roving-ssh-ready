@@ -35,7 +35,7 @@
       "items": [
         {
           "key": "startup-script",
-          "value": "cd /opt && apt-get install git -y || yum install git -y\ngit clone https://github.com/gorponbanjoshark/cloud_study.git\nscripts/startup.sh 2>&1 | tee /var/log/startup.log"
+          "value": "cd /opt && apt-get install git -y || yum install git -y\ngit clone https://github.com/gorponbanjoshark/cloud_study.git\n/opt/cloud_study/scripts/startup.sh 2>&1 | tee /var/log/startup.log"
         }
       ]
     },
