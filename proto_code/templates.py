@@ -1,8 +1,7 @@
 import json
 from googleapiclient.discovery import build
 from copy import deepcopy
-PROJECT = 'dopest-project-ever-351102'
-ZONE = 'us-west4-b'
+from proto_code.config import *
 #
 # usage
 # from proto_code.templates import *
@@ -53,7 +52,7 @@ def insert_instance_template(data, name=None):
     return req.execute()
 
 
-def delete_instance_template(name):
+def delete_instance_template(name, project=PROJECT):
     """ yeah delete an instance template
     :param name: the name
     :returns: HTTP request response
@@ -61,7 +60,7 @@ def delete_instance_template(name):
     service = build('compute', 'v1')
     instance_template = service.instanceTemplates()
     hey = service.instanceTemplates()
-    req = hey.delete(project=PROJECT, instanceTemplate=name)
+    req = hey.delete(project=project, instanceTemplate=name)
     return req.execute()
 
 def update_template(name='roving-ssh-ready'):
@@ -76,17 +75,3 @@ def update_template(name='roving-ssh-ready'):
     insert_instance_template(the_data)
     return list_all_instance_templates()
 
-def list_instances(project=PROJECT, zone=ZONE, names_only=False):
-    """
-    list instances of VMs
-    :param project: gcp project
-    :param zone: gcp zone
-    :param names_only: just produce list of VM instance names
-    """
-    service = build('compute', 'v1')
-    instances = service.instances()
-    req = instances.list(project=project, zone=zone)
-    response = req.execute()
-    if names_only:
-        return [item['name'] for item in response['items']]
-    return response
