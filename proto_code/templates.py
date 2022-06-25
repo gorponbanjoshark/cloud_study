@@ -2,6 +2,7 @@ import json
 from googleapiclient.discovery import build
 from copy import deepcopy
 PROJECT = 'dopest-project-ever-351102'
+ZONE = 'us-west4-b'
 #
 # usage
 # from proto_code.templates import *
@@ -69,7 +70,23 @@ def update_template(name='roving-ssh-ready'):
     :param name: name of template instance. must match filename within templates/
     :returns all instance template names found
     """
-    delete_instance_template(name)
-    the_data = get_json(f'templates/{name}')
+    if name in get_instance_template_names():
+        delete_instance_template(name)
+    the_data = get_json(f'templates/f{name}')
     insert_instance_template(the_data)
     return list_all_instance_templates()
+
+def list_instances(project=PROJECT, zone=ZONE, names_only=False):
+    """
+    list instances of VMs
+    :param project: gcp project
+    :param zone: gcp zone
+    :param names_only: just produce list of VM instance names
+    """
+    service = build('compute', 'v1')
+    instances = service.instances()
+    req = instances.list(project=project, zone=zone)
+    response = req.execute()
+    if names_only:
+        return [item['name'] for item in response['items']]
+    return response
