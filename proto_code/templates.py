@@ -59,8 +59,7 @@ def delete_instance_template(name, project=PROJECT):
     """
     service = build('compute', 'v1')
     instance_template = service.instanceTemplates()
-    hey = service.instanceTemplates()
-    req = hey.delete(project=project, instanceTemplate=name)
+    req = instance_template.delete(project=project, instanceTemplate=name)
     return req.execute()
 
 def update_template(name='roving-ssh-ready'):

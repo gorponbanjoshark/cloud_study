@@ -45,7 +45,7 @@
           {
             "kind": "compute#accessConfig",
             "name": "External NAT",
-            "networkTier": "PREMIUM",
+            "networkTier": "STANDARD",
             "type": "ONE_TO_ONE_NAT"
           }
         ],
